@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import bootData from "./bootData";
 
 const LINE_DELAY = 700;
@@ -11,17 +10,22 @@ export function useBootSequence() {
   const [currentLine, setCurrentLine] = useState(0);
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
   const [currentText, setCurrentText] = useState("");
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
-    if (currentLine >= bootData.length) return;
+    if (currentLine >= bootData.length) {
+      const timer = setTimeout(() => {
+        setFinished(true);
+      }, 1200);
+
+      return () => clearTimeout(timer);
+    }
 
     const line = bootData[currentLine];
-
     let charIndex = 0;
 
     const typing = setInterval(() => {
       setCurrentText(line.slice(0, charIndex + 1));
-
       charIndex++;
 
       if (charIndex >= line.length) {
@@ -41,6 +45,6 @@ export function useBootSequence() {
   return {
     displayedLines,
     currentText,
-    finished: currentLine >= bootData.length,
+    finished,
   };
 }
