@@ -1,38 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSystemClock } from "./useSystemClock";
 
 export default function TopBar() {
-  const [time, setTime] = useState("");
+  const now = useSystemClock();
 
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
+  const date = now.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
-      setTime(
-        now.toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }),
-      );
-    };
-
-    updateClock();
-
-    const interval = setInterval(updateClock, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const time = now.toLocaleTimeString("en-GB", {
+    hour12: false,
+  });
 
   return (
-    <header className="flex items-center justify-between border-b border-cyan-900 px-6 py-4 font-mono">
-      <div>GENESIS COMMAND</div>
+    <header className="flex h-16 items-center justify-between border-b border-cyan-900/60 bg-cyan-950/20 px-6">
+      {/* Left */}
+      <div>
+        <h1 className="font-mono text-sm tracking-[0.3em] text-cyan-300 uppercase">
+          Genesis Command
+        </h1>
 
-      <div>ASTRA : ONLINE</div>
+        <p className="font-mono text-xs text-cyan-600">
+          Genesis Organization Archive
+        </p>
+      </div>
 
-      <div>{time}</div>
+      {/* Right */}
+      <div className="text-right font-mono">
+        <p className="text-xs text-emerald-400">● ASTRA ONLINE</p>
+
+        <p className="text-xs text-cyan-500">{date}</p>
+
+        <p className="text-sm text-cyan-200">{time}</p>
+      </div>
     </header>
   );
 }
