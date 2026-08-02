@@ -1,7 +1,5 @@
+import BootSequence from "@/features/boot/BootSequence";
+
 export default function Home() {
-  return (
-    <main>
-      Genesis Archive
-    </main>
-  )
+  return <BootSequence />;
 }
