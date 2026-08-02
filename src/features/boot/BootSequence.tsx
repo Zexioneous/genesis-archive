@@ -1,22 +1,33 @@
 "use client";
 
+import GenesisLogo from "@/shared/components/GenesisLogo";
+import { motion } from "framer-motion";
 import { useBootSequence } from "./useBootSequence";
 
 export default function BootSequence() {
   const { displayedLines, currentText } = useBootSequence();
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black px-8 text-cyan-400">
-      <div className="w-full max-w-3xl font-mono text-lg">
+    <main className="min-h-screen bg-black px-10 py-10 text-cyan-400">
+      <GenesisLogo />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 1,
+        }}
+        className="mx-auto max-w-5xl font-mono text-lg leading-8"
+      >
         {displayedLines.map((line, index) => (
           <p key={index}>{line}</p>
         ))}
 
         <p>
           {currentText}
-          <span className="animate-pulse">▊</span>
+          <span className="animate-pulse">▋</span>
         </p>
-      </div>
+      </motion.div>
     </main>
   );
 }
