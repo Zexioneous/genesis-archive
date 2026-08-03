@@ -42,9 +42,12 @@ export function useBootSequence() {
     return () => clearInterval(typing);
   }, [currentLine]);
 
+  const progress = Math.round((currentLine / bootData.length) * 100);
+
   return {
     displayedLines,
     currentText,
     finished,
+    progress,
   };
 }

@@ -1,13 +1,26 @@
-export default function GenesisLogo() {
-  return (
-    <div className="mb-10 text-center">
-      <h1 className="glow font-mono text-5xl font-bold tracking-[0.5em] text-cyan-400">
-        GENESIS
-      </h1>
+import Image from "next/image";
 
-      <p className="mt-4 font-mono text-sm tracking-[0.3em] text-cyan-700">
-        ORGANIZATION ARCHIVE SYSTEM
-      </p>
+type GenesisLogoProps = {
+  size?: number;
+};
+
+export default function GenesisLogo({ size = 96 }: GenesisLogoProps) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+      }}
+      className="flex items-center justify-center"
+    >
+      <Image
+        src="/images/genesis-logo.png"
+        alt="Genesis Organization"
+        width={size}
+        height={size}
+        className="h-full w-full object-contain drop-shadow-[0_0_16px_rgba(34,211,238,0.8)] transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_24px_rgba(34,211,238,1)]"
+        priority
+      />
     </div>
   );
 }

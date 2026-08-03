@@ -5,7 +5,7 @@ import Starfield from "./Starfield";
 
 export default function UniverseBackground() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#02050d]">
+    <div className="absolute inset-0 overflow-hidden">
       <Nebula />
       <Starfield />
     </div>

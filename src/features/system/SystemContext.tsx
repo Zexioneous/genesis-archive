@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 
-export type Page =
+export type activePage =
   | "personnel"
   | "missions"
   | "technology"
@@ -11,14 +11,14 @@ export type Page =
   | "communications";
 
 type SystemContextType = {
-  activePage: Page;
-  setActivePage: (page: Page) => void;
+  activePage: activePage;
+  setActivePage: (page: activePage) => void;
 };
 
 const SystemContext = createContext<SystemContextType | null>(null);
 
 export function SystemProvider({ children }: { children: React.ReactNode }) {
-  const [activePage, setActivePage] = useState<Page>("personnel");
+  const [activePage, setActivePage] = useState<activePage>("personnel");
 
   return (
     <SystemContext.Provider

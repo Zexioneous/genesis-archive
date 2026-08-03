@@ -18,3 +18,17 @@ body {
     0 0 5px rgba(34, 211, 238, 0.8),
     0 0 15px rgba(34, 211, 238, 0.4);
 }
+
+@keyframes genesisPulse {
+  0% {
+    filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.5));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 22px rgba(34, 211, 238, 1));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.5));
+  }
+}
