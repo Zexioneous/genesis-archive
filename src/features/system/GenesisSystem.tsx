@@ -1,23 +1,28 @@
 "use client";
 
-import UniverseBackground from "@/universe/background/UniverseBackground";
-import Sidebar from "./Sidebar";
-import { SystemProvider } from "./SystemContext";
-import TopBar from "./TopBar";
-import Workspace from "./Workspace";
+import NotificationContainer from "@/features/notifications/NotificationContainer";
+import { NotificationProvider } from "@/features/notifications/NotificationContext";
+
+import Sidebar from "./components/Sidebar";
+import TopBar from "./components/TopBar";
+import Workspace from "./components/Workspace";
+import { SystemProvider } from "./context/SystemContext";
 
 export default function GenesisSystem() {
   return (
     <SystemProvider>
-      <UniverseBackground />
-      <main className="flex h-screen bg-transparent text-cyan-400">
-        <Sidebar />
+      <NotificationProvider>
+        <NotificationContainer />
 
-        <section className="flex flex-1 flex-col">
-          <TopBar />
-          <Workspace />
-        </section>
-      </main>
+        <main className="flex h-screen bg-black text-cyan-400">
+          <Sidebar />
+
+          <section className="flex flex-1 flex-col">
+            <TopBar />
+            <Workspace />
+          </section>
+        </main>
+      </NotificationProvider>
     </SystemProvider>
   );
 }

@@ -1,9 +1,9 @@
 "use client";
 
-import MissionArchive from "../archive/missions/MissionArchive";
-import Personnel from "../archive/pages/Personnel";
+import MissionArchive from "../../archive/missions/MissionArchive";
+import Personnel from "../../archive/pages/Personnel";
 
-import { useSystem } from "./SystemContext";
+import { useSystem } from "../context/SystemContext";
 
 export default function Workspace() {
   const { activePage } = useSystem();

@@ -2,9 +2,9 @@
 
 import GenesisLogo from "@/shared/components/GenesisLogo";
 
-import navigation from "./navigation";
+import { useSystem } from "../context/SystemContext";
+import navigation from "../navigation";
 import SidebarItem from "./SidebarItem";
-import { useSystem } from "./SystemContext";
 
 export default function Sidebar() {
   const { activePage, setActivePage } = useSystem();
