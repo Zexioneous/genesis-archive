@@ -1,6 +1,6 @@
 "use client";
 
-import NotificationContainer from "@/features/notifications/NotificationContainer";
+import NotificationContainer from "@/features/notifications/components/NotificationContainer";
 import { NotificationProvider } from "@/features/notifications/NotificationContext";
 
 import Sidebar from "./components/Sidebar";

@@ -2,8 +2,8 @@
 
 import { AnimatePresence } from "framer-motion";
 
+import { useNotification } from "../hooks/useNotification";
 import Notification from "./Notification";
-import { useNotification } from "./useNotification";
 
 export default function NotificationContainer() {
   const { notifications, remove } = useNotification();
