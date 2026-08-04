@@ -1,7 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { useSearchContext } from "@/features/search/context/SearchContext";
+import { useSystem } from "@/features/system/context/SystemContext";
 
 import { useCommand } from "../CommandPaletteContext";
 import commands from "../data/commands";
@@ -12,6 +15,8 @@ type CommandPaletteProps = {
 
 export default function CommandPalette({ open }: CommandPaletteProps) {
   const { close } = useCommand();
+  const { open: openSearch } = useSearchContext();
+  const { setActivePage } = useSystem();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,6 +34,37 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
         command.description.toLowerCase().includes(search),
     );
   }, [query]);
+
+  const executeCommand = useCallback(
+    (action: string) => {
+      switch (action) {
+        case "open-personnel":
+          setActivePage("personnel");
+          break;
+
+        case "open-missions":
+          setActivePage("missions");
+          break;
+
+        case "open-timeline":
+          setActivePage("timeline");
+          break;
+
+        case "open-search":
+          openSearch();
+          break;
+
+        case "open-terminal":
+          console.log("Terminal coming soon...");
+          break;
+      }
+
+      setQuery("");
+      setSelectedIndex(0);
+      close();
+    },
+    [setActivePage, openSearch, close],
+  );
 
   // Focus input when palette opens
   useEffect(() => {
@@ -63,10 +99,7 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
       if (event.key === "Enter") {
         event.preventDefault();
 
-        filteredCommands[selectedIndex].action();
-
-        setQuery("");
-        close();
+        executeCommand(filteredCommands[selectedIndex].action);
       }
     }
 
@@ -75,7 +108,7 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [open, filteredCommands, selectedIndex, close]);
+  }, [open, filteredCommands, selectedIndex, executeCommand]);
 
   return (
     <AnimatePresence>
@@ -142,11 +175,7 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
                     <button
                       key={command.id}
                       onMouseEnter={() => setSelectedIndex(index)}
-                      onClick={() => {
-                        command.action();
-                        setQuery("");
-                        close();
-                      }}
+                      onClick={() => executeCommand(command.action)}
                       className={`flex w-full items-start gap-4 rounded-lg px-4 py-3 text-left transition ${
                         selectedIndex === index
                           ? "bg-cyan-500/15"

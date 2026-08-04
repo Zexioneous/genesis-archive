@@ -3,7 +3,12 @@ export type Command = {
   icon: string;
   title: string;
   description: string;
-  action: () => void;
+  action:
+    | "open-personnel"
+    | "open-missions"
+    | "open-timeline"
+    | "open-terminal"
+    | "open-search";
 };
 
 const commands: Command[] = [
@@ -12,36 +17,36 @@ const commands: Command[] = [
     icon: "👤",
     title: "Open Personnel Archive",
     description: "Browse registered Genesis personnel.",
-    action: () => {
-      console.log("Open Personnel");
-    },
+    action: "open-personnel",
   },
   {
     id: "missions",
     icon: "🚀",
     title: "Open Missions",
     description: "View archived mission reports.",
-    action: () => {
-      console.log("Open Missions");
-    },
+    action: "open-missions",
   },
   {
     id: "timeline",
     icon: "🛰",
     title: "Open Timeline",
     description: "Explore Genesis historical events.",
-    action: () => {
-      console.log("Open Timeline");
-    },
+    action: "open-timeline",
   },
   {
     id: "terminal",
     icon: "💻",
     title: "Terminal Mode",
     description: "Open the Genesis command terminal.",
-    action: () => {
-      console.log("Open Terminal");
-    },
+    action: "open-terminal",
+  },
+
+  {
+    id: "search-archive",
+    title: "Search Archive",
+    description: "Open the Genesis Archive Search",
+    icon: "🔍",
+    action: "open-search",
   },
 ];
 
