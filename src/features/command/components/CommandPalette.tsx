@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { useNotification } from "@/features/notifications/hooks/useNotification";
 import { useSearchContext } from "@/features/search/context/SearchContext";
 import { useSystem } from "@/features/system/context/SystemContext";
 
@@ -14,6 +15,7 @@ type CommandPaletteProps = {
 };
 
 export default function CommandPalette({ open }: CommandPaletteProps) {
+  const { notify } = useNotification();
   const { close } = useCommand();
   const { open: openSearch } = useSearchContext();
   const { setActivePage } = useSystem();
@@ -40,22 +42,53 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
       switch (action) {
         case "open-personnel":
           setActivePage("personnel");
+
+          notify({
+            title: "PERSONNEL ARCHIVE",
+            message: "Personnel records loaded.",
+            type: "system",
+          });
           break;
 
         case "open-missions":
           setActivePage("missions");
+
+          notify({
+            title: "MISSION ARCHIVE",
+            message: "Mission database loaded.",
+            type: "system",
+          });
           break;
 
         case "open-timeline":
           setActivePage("timeline");
+
+          notify({
+            title: "TIMELINE ARCHIVE",
+            message: "Historical archive loaded.",
+            type: "system",
+          });
           break;
 
         case "open-search":
           openSearch();
+
+          notify({
+            title: "ASTRA",
+            message: "Archive Search initialized.",
+            type: "astra",
+          });
           break;
 
         case "open-terminal":
-          console.log("Terminal coming soon...");
+          notify({
+            title: "WARNING",
+            message: "Terminal module coming soon.",
+            type: "warning",
+          });
+          break;
+
+        default:
           break;
       }
 
@@ -63,7 +96,7 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
       setSelectedIndex(0);
       close();
     },
-    [setActivePage, openSearch, close],
+    [setActivePage, openSearch, close, notify],
   );
 
   // Focus input when palette opens
@@ -196,6 +229,13 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
                     </button>
                   ))
                 )}
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-center justify-between border-t border-cyan-500/20 px-5 py-3 font-mono text-xs text-cyan-600">
+                <span>{filteredCommands.length} commands</span>
+
+                <span>↑↓ Navigate • Enter Select • Esc Close</span>
               </div>
             </div>
           </motion.div>

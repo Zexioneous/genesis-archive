@@ -12,7 +12,7 @@ export default function SearchOverlay() {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-8 backdrop-blur-md"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/70 p-8 backdrop-blur-md"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -38,7 +38,7 @@ export default function SearchOverlay() {
               duration: 0.2,
             }}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-5xl"
+            className="mx-auto mt-16 mb-16 w-full max-w-5xl"
           >
             <SearchWindow />
           </motion.div>

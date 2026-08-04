@@ -1,8 +1,15 @@
 export type SearchCategory = "personnel" | "mission" | "timeline" | "document";
 
-export interface SearchResult {
+export type SearchResult = {
   id: string;
   title: string;
   description: string;
-  category: SearchCategory;
-}
+  category: string;
+  page:
+    | "personnel"
+    | "missions"
+    | "timeline"
+    | "technology"
+    | "communications"
+    | "galaxy";
+};
