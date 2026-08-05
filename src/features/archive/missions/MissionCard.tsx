@@ -16,7 +16,7 @@ export default function MissionCard({ mission }: MissionCardProps) {
             {mission.year}
           </span>
 
-          <StatusBadge status={mission.status} />
+          <StatusBadge label="STATUS" status={mission.status} />
         </div>
 
         <p className="text-sm leading-relaxed text-cyan-100/80">

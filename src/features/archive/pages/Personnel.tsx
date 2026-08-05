@@ -29,7 +29,7 @@ export default function Personnel() {
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl text-cyan-200">{personnel.codename}</h2>
 
-                <StatusBadge status={personnel.status} />
+                <StatusBadge label="STATUS" status={personnel.status} />
               </div>
 
               <InfoRow label="Name" value={personnel.name} />
