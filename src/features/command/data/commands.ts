@@ -8,7 +8,8 @@ export type Command = {
     | "open-missions"
     | "open-timeline"
     | "open-terminal"
-    | "open-search";
+    | "open-search"
+    | "open-orbital";
 };
 
 const commands: Command[] = [
@@ -47,6 +48,14 @@ const commands: Command[] = [
     description: "Open the Genesis Archive Search",
     icon: "🔍",
     action: "open-search",
+  },
+
+  {
+    id: "orbital",
+    icon: "🌍",
+    title: "Open Orbital View",
+    description: "Switch to Genesis Orbital View.",
+    action: "open-orbital",
   },
 ];
 

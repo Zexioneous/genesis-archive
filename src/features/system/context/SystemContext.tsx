@@ -8,7 +8,8 @@ export type activePage =
   | "technology"
   | "timeline"
   | "galaxy"
-  | "communications";
+  | "communications"
+  | "orbital";
 
 type SystemContextType = {
   activePage: activePage;

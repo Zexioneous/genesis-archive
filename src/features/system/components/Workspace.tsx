@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 
+import OrbitalView from "@/features/orbital/pages/OrbitalView";
 import MissionArchive from "../../archive/missions/MissionArchive";
 import Personnel from "../../archive/pages/Personnel";
 
@@ -17,6 +18,9 @@ export default function Workspace() {
 
       case "missions":
         return <MissionArchive />;
+
+      case "orbital":
+        return <OrbitalView />;
 
       default:
         return <Personnel />;

@@ -88,6 +88,17 @@ export default function CommandPalette({ open }: CommandPaletteProps) {
           });
           break;
 
+        case "open-orbital":
+          setActivePage("orbital");
+
+          notify({
+            title: "ORBITAL VIEW",
+            message: "Initializing orbital camera...",
+            type: "system",
+          });
+
+          break;
+
         default:
           break;
       }

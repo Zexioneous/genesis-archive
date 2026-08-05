@@ -7,7 +7,7 @@ const blobs = [
     size: 900,
     top: "50%",
     left: "50%",
-    color: "rgba(0,255,255,1",
+    color: "rgba(0,255,255,1)",
     opacity: 0.8,
     duration: 14,
   },

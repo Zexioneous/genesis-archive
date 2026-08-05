@@ -5,6 +5,7 @@ import { NotificationProvider } from "@/features/notifications/NotificationConte
 
 import SearchOverlay from "@/features/search/components/SearchOverlay";
 import { SearchProvider } from "@/features/search/context/SearchContext";
+import UniverseBackground from "@/universe/background/UniverseBackground";
 import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import Workspace from "./components/Workspace";
@@ -29,11 +30,12 @@ export default function GenesisSystem() {
       <NotificationProvider>
         <CommandPaletteProvider>
           <SearchProvider>
+            <UniverseBackground />
             <NotificationContainer />
             <CommandPaletteRoot />
             <SearchOverlay />
 
-            <main className="flex h-screen bg-black text-cyan-400">
+            <main className="relative flex h-screen bg-[#02070b]/40 text-cyan-400">
               <Sidebar />
 
               <section className="flex flex-1 flex-col">

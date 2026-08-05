@@ -1,5 +1,5 @@
 export type NavigationItem = {
-  id: "personnel" | "missions";
+  id: "personnel" | "missions" | "orbital";
   label: string;
 };
 
@@ -11,6 +11,10 @@ const navigation: NavigationItem[] = [
   {
     id: "missions",
     label: "Mission Archive",
+  },
+  {
+    id: "orbital",
+    label: "Orbital View",
   },
 ];
 

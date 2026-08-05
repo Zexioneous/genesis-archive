@@ -27,7 +27,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <div className="flex-1 px-4 py-6">
         <h2 className="mb-5 font-mono text-sm tracking-[0.35em] text-cyan-300 uppercase">
-          Archive
+          Genesis Modules
         </h2>
 
         <div className="space-y-1">
