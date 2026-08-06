@@ -24,18 +24,16 @@ export default function Planet() {
 
   return (
     <mesh ref={planetRef}>
-      <sphereGeometry args={[2, 512, 512]} />
+      <sphereGeometry args={[2, 128, 128]} />
 
-      <meshPhysicalMaterial
+      <meshStandardMaterial
         map={textures.map}
         normalMap={textures.normalMap}
         roughnessMap={textures.roughnessMap}
         displacementMap={textures.displacementMap}
         displacementScale={0.03}
-
         roughness={1}
         metalness={0}
-        clearcoat={0.05}
       />
     </mesh>
   );

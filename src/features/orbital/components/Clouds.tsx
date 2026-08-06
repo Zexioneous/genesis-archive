@@ -20,7 +20,7 @@ export default function Clouds() {
 
   return (
     <mesh ref={cloudRef} scale={1.015} rotation={[0.03, 0, 0]}>
-      <sphereGeometry args={[2, 256, 256]} />
+      <sphereGeometry args={[2, 64, 64]} />
 
       <meshPhongMaterial
         map={cloudTexture}

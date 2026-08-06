@@ -1,12 +1,24 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-
-import OrbitalView from "@/features/orbital/pages/OrbitalView";
+import dynamic from "next/dynamic";
 import MissionArchive from "../../archive/missions/MissionArchive";
 import Personnel from "../../archive/pages/Personnel";
-
 import { useSystem } from "../context/SystemContext";
+
+const OrbitalView = dynamic(
+  () => import("@/features/orbital/pages/OrbitalView"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-full items-center justify-center">
+        <p className="font-mono text-sm tracking-[0.3em] text-cyan-500 uppercase">
+          Initializing Orbital View...
+        </p>
+      </div>
+    ),
+  },
+);
 
 export default function Workspace() {
   const { activePage } = useSystem();

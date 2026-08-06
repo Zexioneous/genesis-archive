@@ -10,33 +10,21 @@ import Planet from "../components/Planet";
 export default function OrbitalScene() {
   return (
     <Canvas
-      shadows
+      dpr={[1, 1.5]}
       camera={{
         position: [0, 0, 6],
         fov: 45,
       }}
     >
-      {/* Space ambient */}
-      <ambientLight intensity={0.08} />
+      <ambientLight intensity={0.12} />
 
-      {/* Main Sun */}
-      <directionalLight
-        castShadow
-        position={[10, 3, 5]}
-        intensity={5}
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-      />
+      <directionalLight position={[10, 3, 5]} intensity={2.5} />
 
-      {/* Rim light */}
       <directionalLight
         position={[-8, -2, -5]}
-        intensity={0.25}
+        intensity={0.18}
         color="#6ecbff"
       />
-
-      {/* Tiny fill */}
-      <pointLight position={[0, 0, 0]} intensity={0.08} color="#8de9ff" />
 
       <Planet />
       <Clouds />
