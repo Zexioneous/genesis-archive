@@ -6,10 +6,12 @@ import { Canvas } from "@react-three/fiber";
 import Atmosphere from "../components/Atmosphere";
 import Clouds from "../components/Clouds";
 import Planet from "../components/Planet";
+import Selene from "../components/Selene";
 
 export default function OrbitalScene() {
   return (
     <Canvas
+      shadows
       dpr={[1, 1.5]}
       camera={{
         position: [0, 0, 6],
@@ -18,7 +20,19 @@ export default function OrbitalScene() {
     >
       <ambientLight intensity={0.08} />
 
-      <directionalLight position={[10, 3, 5]} intensity={2.5} />
+      <directionalLight
+        castShadow
+        position={[10, 3, 5]}
+        intensity={5}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-near={0.1}
+        shadow-camera-far={30}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
 
       <directionalLight
         position={[-8, -2, -5]}
@@ -29,6 +43,7 @@ export default function OrbitalScene() {
       <Planet />
       <Clouds />
       <Atmosphere />
+      <Selene />
 
       <OrbitControls
         enablePan={false}

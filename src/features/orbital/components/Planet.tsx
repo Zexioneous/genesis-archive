@@ -18,12 +18,11 @@ export default function Planet() {
   useFrame((_, delta) => {
     if (!planetRef.current) return;
 
-    // One full rotation every ~120 seconds
     planetRef.current.rotation.y += delta * 0.05;
   });
 
   return (
-    <mesh ref={planetRef}>
+    <mesh ref={planetRef} receiveShadow>
       <sphereGeometry args={[2, 128, 128]} />
 
       <meshStandardMaterial
