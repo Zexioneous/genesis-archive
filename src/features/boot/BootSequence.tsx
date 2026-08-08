@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import GenesisSystem from "@/features/system/GenesisSystem";
 import GenesisLogo from "@/shared/components/GenesisLogo";
-import UniverseBackground from "@/universe/background/UniverseBackground";
+import GenesisBackground from "@/universe/background/GenesisBackground";
 
 import BootProgress from "./BootProgress";
 import { useBootSequence } from "./useBootSequence";
@@ -23,7 +23,7 @@ export default function BootSequence() {
           transition={{ duration: 1 }}
         >
           {/* Universe */}
-          <UniverseBackground />
+          <GenesisBackground />
 
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/40" />

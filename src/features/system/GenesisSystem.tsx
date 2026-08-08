@@ -5,7 +5,7 @@ import { NotificationProvider } from "@/features/notifications/NotificationConte
 
 import SearchOverlay from "@/features/search/components/SearchOverlay";
 import { SearchProvider } from "@/features/search/context/SearchContext";
-import UniverseBackground from "@/universe/background/UniverseBackground";
+import GenesisBackground from "@/universe/background/GenesisBackground";
 import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import Workspace from "./components/Workspace";
@@ -30,7 +30,7 @@ export default function GenesisSystem() {
       <NotificationProvider>
         <CommandPaletteProvider>
           <SearchProvider>
-            <UniverseBackground />
+            <GenesisBackground />
             <NotificationContainer />
             <CommandPaletteRoot />
             <SearchOverlay />

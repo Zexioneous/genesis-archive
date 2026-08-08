@@ -16,7 +16,7 @@ export default function OrbitalScene() {
         fov: 45,
       }}
     >
-      <ambientLight intensity={0.12} />
+      <ambientLight intensity={0.08} />
 
       <directionalLight position={[10, 3, 5]} intensity={2.5} />
 
