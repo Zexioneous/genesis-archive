@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 
 import Atmosphere from "../components/Atmosphere";
 import Clouds from "../components/Clouds";
+import GenesisStation from "../components/GenesisStation";
 import Planet from "../components/Planet";
 import Selene from "../components/Selene";
 
@@ -44,6 +45,7 @@ export default function OrbitalScene() {
       <Clouds />
       <Atmosphere />
       <Selene />
+      <GenesisStation />
 
       <OrbitControls
         enablePan={false}
