@@ -8,9 +8,9 @@ type ObservationDeckProps = {
 
 export default function ObservationDeck({ children }: ObservationDeckProps) {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[#02050a]">
+    <div className="relative h-full w-full overflow-hidden bg-black">
       {/* Deep-space viewing area */}
-      <div className="absolute inset-0">{children}</div>
+      {children}
 
       {/* Left structural frame */}
       <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-12 border-r border-cyan-300/10 bg-linear-to-r from-[#071017] via-[#071017]/80 to-transparent" />
@@ -52,6 +52,7 @@ export default function ObservationDeck({ children }: ObservationDeckProps) {
             <p className="text-[8px] tracking-widest text-cyan-700 uppercase">
               Camera
             </p>
+
             <p className="mt-1 text-[10px] text-cyan-400">ACTIVE</p>
           </div>
 
@@ -59,6 +60,7 @@ export default function ObservationDeck({ children }: ObservationDeckProps) {
             <p className="text-[8px] tracking-widest text-cyan-700 uppercase">
               Tracking
             </p>
+
             <p className="mt-1 text-[10px] text-emerald-400">LOCKED</p>
           </div>
         </div>

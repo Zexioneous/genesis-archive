@@ -9,18 +9,20 @@ import GenesisStation from "../components/GenesisStation";
 import Planet from "../components/Planet";
 import Selene from "../components/Selene";
 
-export default function OrbitalScene() {
+type OrbitalSceneProps = {
+  onSelectObject: (object: string) => void;
+};
+
+export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
   return (
     <Canvas
       shadows
       dpr={[1, 1.5]}
       camera={{
-        position: [0, 0, 6],
+        position: [0, 0, 8],
         fov: 45,
       }}
     >
-      <ambientLight intensity={0.08} />
-
       <directionalLight
         castShadow
         position={[10, 3, 5]}
@@ -41,7 +43,8 @@ export default function OrbitalScene() {
         color="#6ecbff"
       />
 
-      <Planet />
+      <Planet onSelect={() => onSelectObject("elysia")} />
+
       <Clouds />
       <Atmosphere />
       <Selene />
@@ -54,7 +57,7 @@ export default function OrbitalScene() {
         dampingFactor={0.08}
         rotateSpeed={0.6}
         minDistance={3.5}
-        maxDistance={12}
+        maxDistance={18}
       />
     </Canvas>
   );
