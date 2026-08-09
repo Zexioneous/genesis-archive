@@ -55,7 +55,7 @@ export default function Nyx({ onSelect }: NyxProps) {
           document.body.style.cursor = "default";
         }}
       >
-        <sphereGeometry args={[0.2, 96, 96]} />
+        <sphereGeometry args={[0.25, 96, 96]} />
 
         <meshStandardMaterial
           map={textures.map}

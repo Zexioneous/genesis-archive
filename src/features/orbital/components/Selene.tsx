@@ -25,7 +25,7 @@ export default function Selene({ onSelect, onSelectNyx }: SeleneProps) {
 
   useFrame((_, delta) => {
     /* ================================================== */
-    /* ORBIT */
+    /* SELENE ORBIT AROUND ELYSIA */
     /* ================================================== */
 
     if (orbitRef.current) {
@@ -33,7 +33,7 @@ export default function Selene({ onSelect, onSelectNyx }: SeleneProps) {
     }
 
     /* ================================================== */
-    /* SELENE ROTATION */
+    /* SELENE OWN ROTATION */
     /* ================================================== */
 
     if (seleneRef.current) {
@@ -76,10 +76,12 @@ export default function Selene({ onSelect, onSelectNyx }: SeleneProps) {
       </mesh>
 
       {/* ================================================== */}
-      {/* NYX */}
+      {/* NYX ORBIT AROUND SELENE */}
       {/* ================================================== */}
 
-      <Nyx onSelect={onSelectNyx} />
+      <group position={[4.8, 0, 0]}>
+        <Nyx onSelect={onSelectNyx} />
+      </group>
     </group>
   );
 }
