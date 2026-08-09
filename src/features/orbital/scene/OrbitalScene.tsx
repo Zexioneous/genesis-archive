@@ -2,15 +2,18 @@
 
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Atmosphere from "../components/Atmosphere";
 import Clouds from "../components/Clouds";
-import GenesisStation from "../components/GenesisStation";
+import GenesisStation, {
+  GenesisStationHandle,
+} from "../components/GenesisStation";
 import Planet from "../components/Planet";
-import Selene from "../components/Selene";
+import Selene, { SeleneHandle } from "../components/Selene";
 import Starfield from "../components/Starfield";
 
+import CinematicCameraController from "./CinematicCameraController";
 import FreeCameraController from "./FreeCameraController";
 
 type OrbitalSceneProps = {
@@ -18,7 +21,32 @@ type OrbitalSceneProps = {
 };
 
 export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
-  const [freeCamera, setFreeCamera] = useState(false);
+  /*
+   * ==================================================
+   * CAMERA MODE
+   * ==================================================
+   */
+
+  const [cameraMode, setCameraMode] = useState<
+    "orbital" | "free" | "cinematic"
+  >("orbital");
+
+  const freeCamera = cameraMode === "free";
+
+  const cinematic = cameraMode === "cinematic";
+
+  /*
+   * ==================================================
+   * OBJECT REFERENCES
+   * ==================================================
+   *
+   * These are passed to the cinematic controller so
+   * it can track the actual moving objects.
+   */
+
+  const seleneHandle = useRef<SeleneHandle>(null);
+
+  const stationHandle = useRef<GenesisStationHandle>(null);
 
   return (
     <div className="relative h-full w-full">
@@ -45,6 +73,16 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
         {/* ================================================== */}
 
         <FreeCameraController enabled={freeCamera} />
+
+        {/* ================================================== */}
+        {/* CINEMATIC CAMERA */}
+        {/* ================================================== */}
+
+        <CinematicCameraController
+          enabled={cinematic}
+          seleneHandle={seleneHandle}
+          stationHandle={stationHandle}
+        />
 
         {/* ================================================== */}
         {/* PRIMARY LIGHT */}
@@ -88,6 +126,7 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
         {/* ================================================== */}
 
         <Selene
+          ref={seleneHandle}
           onSelect={() => onSelectObject("selene")}
           onSelectNyx={() => onSelectObject("nyx")}
         />
@@ -96,13 +135,16 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
         {/* GENESIS STATION */}
         {/* ================================================== */}
 
-        <GenesisStation onSelect={() => onSelectObject("genesis-station")} />
+        <GenesisStation
+          ref={stationHandle}
+          onSelect={() => onSelectObject("genesis-station")}
+        />
 
         {/* ================================================== */}
         {/* NORMAL ORBITAL CAMERA */}
         {/* ================================================== */}
 
-        {!freeCamera && (
+        {cameraMode === "orbital" && (
           <OrbitControls
             enablePan={false}
             enableZoom
@@ -130,13 +172,11 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
           {/* Buttons */}
 
           <div className="flex gap-1">
-            {/* ORBITAL */}
-
             <button
               type="button"
-              onClick={() => setFreeCamera(false)}
+              onClick={() => setCameraMode("orbital")}
               className={`rounded px-3 py-2 text-xs tracking-wider uppercase transition ${
-                !freeCamera
+                cameraMode === "orbital"
                   ? "bg-cyan-400/20 text-cyan-200"
                   : "text-white/50 hover:bg-white/5 hover:text-white/80"
               }`}
@@ -144,13 +184,11 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
               Orbital
             </button>
 
-            {/* FREE */}
-
             <button
               type="button"
-              onClick={() => setFreeCamera(true)}
+              onClick={() => setCameraMode("free")}
               className={`rounded px-3 py-2 text-xs tracking-wider uppercase transition ${
-                freeCamera
+                cameraMode === "free"
                   ? "bg-cyan-400/20 text-cyan-200"
                   : "text-white/50 hover:bg-white/5 hover:text-white/80"
               }`}
@@ -159,7 +197,23 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
             </button>
           </div>
 
+          {/* Cinematic */}
+
+          <button
+            type="button"
+            onClick={() => setCameraMode("cinematic")}
+            className={`mt-1 w-full rounded px-3 py-2 text-xs tracking-wider uppercase transition ${
+              cameraMode === "cinematic"
+                ? "bg-cyan-400/20 text-cyan-200"
+                : "text-white/50 hover:bg-white/5 hover:text-white/80"
+            }`}
+          >
+            Cinematic
+          </button>
+
+          {/* ================================================== */}
           {/* FREE CAMERA INSTRUCTIONS */}
+          {/* ================================================== */}
 
           {freeCamera && (
             <div className="mt-2 border-t border-white/10 px-2 pt-2 text-[9px] tracking-wider text-white/40 uppercase">
