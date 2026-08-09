@@ -6,7 +6,6 @@ import { Canvas } from "@react-three/fiber";
 import Atmosphere from "../components/Atmosphere";
 import Clouds from "../components/Clouds";
 import GenesisStation from "../components/GenesisStation";
-import Nyx from "../components/Nyx";
 import Planet from "../components/Planet";
 import Selene from "../components/Selene";
 
@@ -44,12 +43,22 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
         color="#6ecbff"
       />
 
+      {/* Elysia-3 */}
+
       <Planet onSelect={() => onSelectObject("elysia")} />
 
       <Clouds />
       <Atmosphere />
-      <Selene onSelect={() => onSelectObject("selene")} />
-      <Nyx onSelect={() => onSelectObject("nyx")} />
+
+      {/* Selene + Nyx orbital system */}
+
+      <Selene
+        onSelect={() => onSelectObject("selene")}
+        onSelectNyx={() => onSelectObject("nyx")}
+      />
+
+      {/* Genesis Station */}
+
       <GenesisStation onSelect={() => onSelectObject("genesis-station")} />
 
       <OrbitControls

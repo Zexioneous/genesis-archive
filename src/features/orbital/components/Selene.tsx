@@ -5,11 +5,14 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
+import Nyx from "./Nyx";
+
 type SeleneProps = {
   onSelect?: () => void;
+  onSelectNyx?: () => void;
 };
 
-export default function Selene({ onSelect }: SeleneProps) {
+export default function Selene({ onSelect, onSelectNyx }: SeleneProps) {
   const orbitRef = useRef<THREE.Group>(null);
   const seleneRef = useRef<THREE.Mesh>(null);
 
@@ -40,6 +43,10 @@ export default function Selene({ onSelect }: SeleneProps) {
 
   return (
     <group ref={orbitRef} rotation={[0, 0, 0]}>
+      {/* ================================================== */}
+      {/* SELENE */}
+      {/* ================================================== */}
+
       <mesh
         ref={seleneRef}
         position={[4.8, 0, 0]}
@@ -67,6 +74,12 @@ export default function Selene({ onSelect }: SeleneProps) {
           metalness={0}
         />
       </mesh>
+
+      {/* ================================================== */}
+      {/* NYX */}
+      {/* ================================================== */}
+
+      <Nyx onSelect={onSelectNyx} />
     </group>
   );
 }

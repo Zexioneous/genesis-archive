@@ -21,12 +21,18 @@ export default function Nyx({ onSelect }: NyxProps) {
   });
 
   useFrame((_, delta) => {
-    // Nyx orbits Selene
+    /* ================================================== */
+    /* NYX ORBIT AROUND SELENE */
+    /* ================================================== */
+
     if (orbitRef.current) {
       orbitRef.current.rotation.y += delta * 0.45;
     }
 
-    // Nyx rotates on its own axis
+    /* ================================================== */
+    /* NYX ROTATION */
+    /* ================================================== */
+
     if (nyxRef.current) {
       nyxRef.current.rotation.y += delta * 0.08;
     }
@@ -41,6 +47,12 @@ export default function Nyx({ onSelect }: NyxProps) {
         onClick={(event) => {
           event.stopPropagation();
           onSelect?.();
+        }}
+        onPointerOver={() => {
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "default";
         }}
       >
         <sphereGeometry args={[0.2, 96, 96]} />
