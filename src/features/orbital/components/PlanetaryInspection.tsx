@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 import ElysiaMapViewer from "./ElysiaMapViewer";
 
 type PlanetaryInspectionProps = {
@@ -10,12 +12,83 @@ export default function PlanetaryInspection({
   onClose,
 }: PlanetaryInspectionProps) {
   return (
-    <div className="absolute inset-0 z-50 overflow-y-auto bg-black text-cyan-100">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 0.35,
+        ease: "easeOut",
+      }}
+      className="absolute inset-0 z-50 overflow-y-auto bg-black text-cyan-100"
+    >
+      {/* ================================================== */}
+      {/* ARCHIVE ACTIVATION */}
+      {/* ================================================== */}
+
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        transition={{
+          delay: 0.35,
+          duration: 0.7,
+          ease: "easeInOut",
+        }}
+        className="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center bg-black"
+      >
+        <div className="w-80 font-mono">
+          <p className="text-[9px] tracking-[0.35em] text-cyan-600 uppercase">
+            Genesis Planetary Archive
+          </p>
+
+          <div className="mt-4 h-px bg-cyan-300/10" />
+
+          <div className="mt-5 space-y-2 text-[8px] tracking-[0.2em] uppercase">
+            <SystemLine label="Target" value="ELYSIA-3" delay={0} />
+
+            <SystemLine label="Surface Data" value="ONLINE" delay={0.06} />
+
+            <SystemLine label="Orbital Data" value="ONLINE" delay={0.12} />
+
+            <SystemLine label="Historical Data" value="ONLINE" delay={0.18} />
+          </div>
+
+          <div className="mt-5 h-px bg-cyan-300/10" />
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              delay: 0.5,
+              duration: 0.25,
+            }}
+            className="mt-4 text-[8px] tracking-[0.3em] text-emerald-400 uppercase"
+          >
+            Archive Ready
+          </motion.p>
+        </div>
+      </motion.div>
+
       {/* ================================================== */}
       {/* HEADER */}
       {/* ================================================== */}
 
-      <header className="sticky top-0 z-20 border-b border-cyan-300/10 bg-black/90 px-8 py-5 backdrop-blur-md">
+      <motion.header
+        initial={{
+          opacity: 0,
+          y: -18,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 0.55,
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+        className="sticky top-0 z-20 border-b border-cyan-300/10 bg-black/90 px-8 py-5 backdrop-blur-md"
+      >
         <div className="flex items-center justify-between">
           <div>
             <p className="font-mono text-[9px] tracking-[0.35em] text-cyan-600 uppercase">
@@ -37,10 +110,10 @@ export default function PlanetaryInspection({
             </p>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* ================================================== */}
-      {/* MAIN CONTENT */}
+      {/* MAIN */}
       {/* ================================================== */}
 
       <main className="px-8 py-8">
@@ -49,28 +122,51 @@ export default function PlanetaryInspection({
         {/* ================================================== */}
 
         <section className="grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_1fr]">
-          {/* ============================================== */}
-          {/* EQUIRECTANGULAR MAP */}
-          {/* ============================================== */}
+          {/* ================================================== */}
+          {/* MAP */}
+          {/* ================================================== */}
 
-          <div className="h-105 overflow-hidden border border-cyan-300/10 bg-[#03090d] lg:h-130">
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.96,
+              y: 10,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.65,
+              duration: 0.65,
+              ease: "easeOut",
+            }}
+            className="h-[420px] overflow-hidden border border-cyan-300/10 bg-[#03090d] lg:h-[520px]"
+          >
             <ElysiaMapViewer />
-            <div className="border-b border-cyan-300/10 px-4 py-3">
-              <p className="font-mono text-[8px] tracking-[0.3em] text-cyan-600 uppercase">
-                Planetary Surface Map
-              </p>
+          </motion.div>
 
-              <p className="mt-1 font-mono text-[7px] tracking-[0.2em] text-cyan-800 uppercase">
-                Equirectangular Projection // ELYSIA-3
-              </p>
-            </div>
-          </div>
-
-          {/* ============================================== */}
+          {/* ================================================== */}
           {/* PLANET DATA */}
-          {/* ============================================== */}
+          {/* ================================================== */}
 
-          <div className="border border-cyan-300/10 bg-[#03090d]">
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 35,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              delay: 0.8,
+              duration: 0.6,
+              ease: "easeOut",
+            }}
+            className="border border-cyan-300/10 bg-[#03090d]"
+          >
             <div className="border-b border-cyan-300/10 px-5 py-4">
               <p className="font-mono text-[8px] tracking-[0.3em] text-cyan-600 uppercase">
                 Planetary Profile
@@ -115,14 +211,29 @@ export default function PlanetaryInspection({
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ================================================== */}
-        {/* STORY */}
+        {/* HISTORICAL ARCHIVE */}
         {/* ================================================== */}
 
-        <section className="mt-8 border border-cyan-300/10 bg-[#03090d]">
+        <motion.section
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            delay: 1.05,
+            duration: 0.65,
+            ease: "easeOut",
+          }}
+          className="mt-8 border border-cyan-300/10 bg-[#03090d]"
+        >
           <div className="border-b border-cyan-300/10 px-5 py-4">
             <p className="font-mono text-[8px] tracking-[0.3em] text-cyan-600 uppercase">
               Historical Archive
@@ -161,13 +272,25 @@ export default function PlanetaryInspection({
               text="Genesis systems currently maintain an active observation lock on Elysia-3. Additional records will be added as new observations become available."
             />
           </div>
-        </section>
+        </motion.section>
 
         {/* ================================================== */}
         {/* RETURN */}
         {/* ================================================== */}
 
-        <div className="flex justify-center py-10">
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            delay: 1.35,
+            duration: 0.5,
+          }}
+          className="flex justify-center py-10"
+        >
           <button
             type="button"
             onClick={onClose}
@@ -175,9 +298,47 @@ export default function PlanetaryInspection({
           >
             Return to Orbit
           </button>
-        </div>
+        </motion.div>
       </main>
-    </div>
+    </motion.div>
+  );
+}
+
+/* ====================================================== */
+/* SYSTEM LINE */
+/* ====================================================== */
+
+type SystemLineProps = {
+  label: string;
+  value: string;
+  delay: number;
+};
+
+function SystemLine({ label, value, delay }: SystemLineProps) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        x: -8,
+      }}
+      animate={{
+        opacity: 1,
+        x: 0,
+      }}
+      transition={{
+        delay: 0.15 + delay,
+        duration: 0.25,
+      }}
+      className="flex justify-between"
+    >
+      <span className="text-cyan-700">{label}</span>
+
+      <span
+        className={value === "ONLINE" ? "text-emerald-400" : "text-cyan-300"}
+      >
+        {value}
+      </span>
+    </motion.div>
   );
 }
 

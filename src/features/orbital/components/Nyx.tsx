@@ -5,7 +5,11 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-export default function Nyx() {
+type NyxProps = {
+  onSelect?: () => void;
+};
+
+export default function Nyx({ onSelect }: NyxProps) {
   const orbitRef = useRef<THREE.Group>(null);
   const nyxRef = useRef<THREE.Mesh>(null);
 
@@ -30,7 +34,15 @@ export default function Nyx() {
 
   return (
     <group ref={orbitRef} rotation={[0.3, -0.15, 0.2]}>
-      <mesh ref={nyxRef} position={[1.15, 0, 0]} castShadow>
+      <mesh
+        ref={nyxRef}
+        position={[1.15, 0, 0]}
+        castShadow
+        onClick={(event) => {
+          event.stopPropagation();
+          onSelect?.();
+        }}
+      >
         <sphereGeometry args={[0.2, 96, 96]} />
 
         <meshStandardMaterial

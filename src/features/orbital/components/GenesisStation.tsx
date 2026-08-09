@@ -5,7 +5,11 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export default function GenesisStation() {
+type GenesisStationProps = {
+  onSelect?: () => void;
+};
+
+export default function GenesisStation({ onSelect }: GenesisStationProps) {
   const stationRef = useRef<THREE.Group>(null);
 
   const timeRef = useRef(0);
@@ -37,43 +41,38 @@ export default function GenesisStation() {
 
       /*
        * ----------------------------------------------------
-       * GENESIS STATION LIGHTS
+       * GENESIS STATION LIGHT GROUPS
        * ----------------------------------------------------
-       *
-       * These are the small lights already modeled
-       * into the GLB.
        */
 
       const isWindow = name.includes("window");
-
       const isSensor = name.includes("sensor");
-
       const isStatus = name.includes("status");
-
       const isLamp = name.includes("lamp");
-
       const isBeacon = name.includes("beacon");
 
       /*
-       * Windows and sensors
-       *
-       * These stay relatively stable.
+       * ----------------------------------------------------
+       * WINDOWS + SENSORS
+       * ----------------------------------------------------
        */
+
       if (isWindow || isSensor) {
         material.color.set("#39d9ff");
         material.emissive.set("#39d9ff");
 
-        // Keep this deliberately low.
+        // Deliberately restrained.
         material.emissiveIntensity = 0.5;
 
         emissiveMaterials.push(material);
       }
 
       /*
-       * Docking/status/lamp lights
-       *
-       * These are slightly brighter but still subtle.
+       * ----------------------------------------------------
+       * STATUS + LAMP LIGHTS
+       * ----------------------------------------------------
        */
+
       if (isStatus || isLamp) {
         material.color.set("#39d9ff");
         material.emissive.set("#39d9ff");
@@ -85,10 +84,11 @@ export default function GenesisStation() {
       }
 
       /*
-       * Beacon
-       *
-       * The beacon gets its own animation.
+       * ----------------------------------------------------
+       * BEACON
+       * ----------------------------------------------------
        */
+
       if (isBeacon) {
         material.color.set("#39d9ff");
         material.emissive.set("#39d9ff");
@@ -118,12 +118,10 @@ export default function GenesisStation() {
      * SUBTLE GENESIS BEACON PULSE
      * ----------------------------------------------------
      *
-     * Approximately:
-     *
-     * 0.20 → 0.50
-     *
-     * This prevents the aggressive white flash.
+     * Keeps the orbital station alive without the
+     * aggressive white flash we removed earlier.
      */
+
     const pulse = 0.25 + Math.sin(timeRef.current * 2.5) * 0.1;
 
     beaconMaterialsRef.current.forEach((material) => {
@@ -137,6 +135,16 @@ export default function GenesisStation() {
       position={[6.5, 1.2, -1.5]}
       rotation={[0.12, -0.45, 0.08]}
       scale={0.45}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect?.();
+      }}
+      onPointerOver={() => {
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        document.body.style.cursor = "default";
+      }}
     >
       <primitive object={scene} />
     </group>

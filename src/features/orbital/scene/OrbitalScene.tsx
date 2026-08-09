@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import Atmosphere from "../components/Atmosphere";
 import Clouds from "../components/Clouds";
 import GenesisStation from "../components/GenesisStation";
+import Nyx from "../components/Nyx";
 import Planet from "../components/Planet";
 import Selene from "../components/Selene";
 
@@ -47,8 +48,9 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
 
       <Clouds />
       <Atmosphere />
-      <Selene />
-      <GenesisStation />
+      <Selene onSelect={() => onSelectObject("selene")} />
+      <Nyx onSelect={() => onSelectObject("nyx")} />
+      <GenesisStation onSelect={() => onSelectObject("genesis-station")} />
 
       <OrbitControls
         enablePan={false}
