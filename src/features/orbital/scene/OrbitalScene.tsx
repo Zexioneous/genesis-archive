@@ -8,6 +8,7 @@ import Clouds from "../components/Clouds";
 import GenesisStation from "../components/GenesisStation";
 import Planet from "../components/Planet";
 import Selene from "../components/Selene";
+import Starfield from "../components/Starfield";
 
 type OrbitalSceneProps = {
   onSelectObject: (object: string) => void;
@@ -23,6 +24,12 @@ export default function OrbitalScene({ onSelectObject }: OrbitalSceneProps) {
         fov: 45,
       }}
     >
+      {/* ================================================== */}
+      {/* CELESTIAL BACKGROUND */}
+      {/* ================================================== */}
+
+      <Starfield />
+
       <directionalLight
         castShadow
         position={[10, 3, 5]}
