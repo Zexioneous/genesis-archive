@@ -1,16 +1,12 @@
 export type NavigationItem = {
-  id: "personnel" | "missions" | "orbital";
+  id: "astra" | "orbital";
   label: string;
 };
 
 const navigation: NavigationItem[] = [
   {
-    id: "personnel",
-    label: "Personnel Record",
-  },
-  {
-    id: "missions",
-    label: "Mission Archive",
+    id: "astra",
+    label: "ASTRA",
   },
   {
     id: "orbital",

@@ -2,9 +2,9 @@
 
 import StatusBadge from "@/shared/ui/StatusBadge";
 
-import { useSystemClock } from "../hooks/useSystemClock";
+import { useSystemClock } from "@/features/system/hooks/useSystemClock";
 
-export default function TopBar() {
+export default function PortfolioTopBar() {
   const now = useSystemClock();
 
   const date = now.toLocaleDateString("en-GB", {
@@ -19,15 +19,18 @@ export default function TopBar() {
 
   return (
     <header className="border-b border-cyan-800/60 bg-linear-to-b from-cyan-950/40 to-[#071019]/90 shadow-[0_0_30px_rgba(34,211,238,0.08)] backdrop-blur-md">
-      {/* Top Row */}
+      {/* ==================================================
+          TOP ROW
+          ================================================== */}
+
       <div className="flex items-center justify-between px-6 py-3">
         <div>
           <h1 className="font-mono text-base font-bold tracking-[0.35em] text-cyan-300 uppercase">
-            Genesis Command
+            Personal Archive
           </h1>
 
           <p className="mt-1 font-mono text-xs text-cyan-600">
-            Genesis Organization Archive
+            Professional Identity Registry
           </p>
         </div>
 
@@ -44,15 +47,18 @@ export default function TopBar() {
         </div>
       </div>
 
-      {/* Bottom Row */}
-      <div className="flex items-center gap-4 border-t border-cyan-900/40 px-6 py-3">
-        <StatusBadge label="ASTRA" status="ONLINE" color="green" />
+      {/* ==================================================
+          SYSTEM STATUS
+          ================================================== */}
 
-        <StatusBadge label="ARCHIVE" status="VERIFIED" color="cyan" />
+      <div className="flex flex-wrap items-center gap-3 border-t border-cyan-900/40 px-6 py-3">
+        <StatusBadge label="REGISTRY" status="ONLINE" color="green" />
 
-        <StatusBadge label="RELAY" status="STABLE" color="yellow" />
+        <StatusBadge label="PROFILE" status="VERIFIED" color="cyan" />
 
-        <StatusBadge label="STATUS" status="ALPHA" color="cyan" />
+        <StatusBadge label="PROJECTS" status="ACTIVE" color="yellow" />
+
+        <StatusBadge label="STATUS" status="AVAILABLE" color="cyan" />
       </div>
     </header>
   );

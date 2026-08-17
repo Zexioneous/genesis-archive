@@ -6,7 +6,11 @@ import { useSystem } from "../context/SystemContext";
 import navigation from "../navigation";
 import SidebarItem from "./SidebarItem";
 
-export default function Sidebar() {
+type SidebarProps = {
+  onReturnToGateway: () => void;
+};
+
+export default function Sidebar({ onReturnToGateway }: SidebarProps) {
   const { activePage, setActivePage } = useSystem();
 
   return (
@@ -36,19 +40,36 @@ export default function Sidebar() {
               key={item.id}
               active={activePage === item.id}
               label={item.label}
-              onClick={() => setActivePage(item.id)}
+              onClick={() => {
+                setActivePage(item.id);
+              }}
             />
           ))}
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="mt-6 border-t border-cyan-900/50 pt-6 font-mono text-xs">
-        <p className="text-emerald-400">● ASTRA ONLINE</p>
+      {/* Gateway */}
+      <div className="border-t border-cyan-900/50 pt-5">
+        <button
+          type="button"
+          onClick={onReturnToGateway}
+          className="group flex w-full items-center gap-3 rounded-md border border-cyan-900/40 px-3 py-3 text-left font-mono text-xs tracking-[0.2em] text-cyan-600 uppercase transition-all duration-200 hover:border-cyan-500/40 hover:bg-cyan-500/5 hover:text-cyan-300"
+        >
+          <span className="text-cyan-700 transition-transform duration-200 group-hover:-translate-x-1">
+            ←
+          </span>
 
-        <p className="mt-3 text-cyan-600">Genesis Archive</p>
+          <span>Return to Gateway</span>
+        </button>
 
-        <p className="text-cyan-500">v0.3.0</p>
+        {/* Status */}
+        <div className="mt-5 border-t border-cyan-900/30 pt-5 font-mono text-xs">
+          <p className="text-emerald-400">● ASTRA ONLINE</p>
+
+          <p className="mt-3 text-cyan-600">Genesis Archive</p>
+
+          <p className="text-cyan-500">v0.3.0</p>
+        </div>
       </div>
     </aside>
   );

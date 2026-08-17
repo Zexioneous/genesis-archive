@@ -1,51 +1,40 @@
 "use client";
 
-import NotificationContainer from "@/features/notifications/components/NotificationContainer";
-import { NotificationProvider } from "@/features/notifications/NotificationContext";
-
-import SearchOverlay from "@/features/search/components/SearchOverlay";
-import { SearchProvider } from "@/features/search/context/SearchContext";
 import GenesisBackground from "@/universe/background/GenesisBackground";
+
 import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import Workspace from "./components/Workspace";
 import { SystemProvider } from "./context/SystemContext";
 
-import {
-  CommandPaletteProvider,
-  useCommand,
-} from "@/features/command/CommandPaletteContext";
+type GenesisSystemProps = {
+  initialField: "portfolio" | "genesis" | "lore";
+  onReturnToGateway: () => void;
+};
 
-import CommandPalette from "@/features/command/components/CommandPalette";
+export default function GenesisSystem({
+  initialField,
+  onReturnToGateway,
+}: GenesisSystemProps) {
+  if (initialField === "portfolio") {
+    return null;
+  }
 
-function CommandPaletteRoot() {
-  const { isOpen } = useCommand();
-
-  return <CommandPalette open={isOpen} />;
-}
-
-export default function GenesisSystem() {
   return (
     <SystemProvider>
-      <NotificationProvider>
-        <CommandPaletteProvider>
-          <SearchProvider>
-            <GenesisBackground />
-            <NotificationContainer />
-            <CommandPaletteRoot />
-            <SearchOverlay />
+      <div className="relative h-screen overflow-hidden">
+        <GenesisBackground />
 
-            <main className="relative flex h-screen bg-[#02070b]/40 text-cyan-400">
-              <Sidebar />
+        <main className="relative flex h-screen bg-[#02070b]/40 text-cyan-400">
+          <Sidebar onReturnToGateway={onReturnToGateway} />
 
-              <section className="flex flex-1 flex-col">
-                <TopBar />
-                <Workspace />
-              </section>
-            </main>
-          </SearchProvider>
-        </CommandPaletteProvider>
-      </NotificationProvider>
+          <section className="flex min-h-0 flex-1 flex-col overflow-hidden">
+            <TopBar />
+
+            <Workspace />
+          </section>
+        </main>
+      </div>
     </SystemProvider>
   );
 }

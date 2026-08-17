@@ -15,6 +15,7 @@ export default function SidebarItem({
 }: SidebarItemProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={clsx(
         "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left font-mono transition-all duration-200",
